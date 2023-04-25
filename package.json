@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build-client": "cd client && npm install && npm run build && cd ..",
-    "start": "node ./bin/www"
+    "start": "node --watch ./bin/www"
   },
   "dependencies": {
     "bunyan-middleware": "^1.0.1",
@@ -14,6 +14,7 @@
     "express": "~4.16.1",
     "express-winston": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
+    "pg": "^8.10.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {

@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 
 const authRouter = require('./routes/auth');
+const apiRouter = require('./routes/api');
 
 const createApp = (logger) => {
   const app = express();
@@ -18,6 +19,7 @@ const createApp = (logger) => {
   app.use(express.static(buildPath));
 
   app.use('/auth', authRouter);
+  app.use('/api', apiRouter);
 
   // catch 404 and forward to error handler
   app.use((req, res) => {
