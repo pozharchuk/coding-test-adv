@@ -1,8 +1,10 @@
 const express = require('express');
 
 const router = express.Router();
-const animals = require('./categories');
+const categories = require('./categories');
+const photos = require('./photos');
 
-router.use('/categories', animals);
+router.use('/categories', categories);
+router.use('/photos', photos);
 
 module.exports = router;
