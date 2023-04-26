@@ -4,13 +4,23 @@ const router = express.Router();
 const pool = require('../db');
 const { authenticateJWT } = require('../services/auth');
 
-router.get('/:categoryId', async (req, res) => {
-  const { categoryId } = req.params;
+// Get photo URLs for multiple category IDs
+router.get('/', async (req, res) => {
+  const categoryIds = req.query.id ? req.query.id.split(',') : [];
+  let query;
+
+  if (categoryIds.length === 0) {
+    query = 'SELECT photo_url FROM animal_photos';
+  } else {
+    // Generate placeholders for the query parameters, e.g., '$1, $2, $3'
+    const placeholders = categoryIds.map((_, index) => `$${index + 1}`).join(', ');
+    query = `SELECT photo_url FROM animal_photos WHERE category_id IN (${placeholders})`;
+  }
 
   try {
     const queryResult = await pool.query(
-      'SELECT photo_url FROM animal_photos WHERE category_id = $1',
-      [categoryId],
+      query,
+      categoryIds,
     );
     res.json(queryResult.rows.map((row) => row.photo_url));
   } catch (err) {

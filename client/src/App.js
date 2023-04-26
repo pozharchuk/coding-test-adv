@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import {useState, useEffect, useCallback} from 'react';
 import './App.css';
+import { Loader } from "./components/Loader/Loader";
+import { useCategories } from "./hooks/useCategories";
+import { Filters } from "./components/Filters/Filters";
+import { usePhotos } from "./hooks/usePhotos";
+import { Carousel } from "./components/Сarousel/Сarousel";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [loading, setLoading] = useState(false);
+
+    const [ categories, loadingCategories,  errorCategories ] = useCategories();
+    const [ photos, fetchPhotos, loadingPhotos, errorPhotos ] = usePhotos(categories)
+
+    useEffect(() => {
+        setLoading(loadingCategories || loadingPhotos);
+    }, [loadingCategories, loadingPhotos])
+
+    const handleFilterSelect = useCallback((filters) => fetchPhotos(filters), [fetchPhotos]);
+
+
+    return (
+        <div className="App">
+            {loading && <Loader /> }
+            <Filters onFilterSelect={handleFilterSelect} filters={categories} />
+            <Carousel photos={photos} />
+        </div>
+    );
 }
 
 export default App;
