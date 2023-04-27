@@ -40,11 +40,11 @@ router.delete('/:categoryId', authenticateJWT, async (req, res) => {
   try {
     const { categoryId } = req.params;
 
-    // Delete the category from the animal_categories table
-    await pool.query('DELETE FROM animal_categories WHERE id = $1', [categoryId]);
-
     // Delete the associated photos from the animal_photos table
     await pool.query('DELETE FROM animal_photos WHERE category_id = $1', [categoryId]);
+
+    // Delete the category from the animal_categories table
+    await pool.query('DELETE FROM animal_categories WHERE id = $1', [categoryId]);
 
     res.status(200).json({ message: 'Category deleted successfully' });
   } catch (err) {
