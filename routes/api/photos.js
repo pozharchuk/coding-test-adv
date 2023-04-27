@@ -44,9 +44,9 @@ router.post('/', authenticateJWT, async (req, res) => {
 // Delete a photo by ID
 router.delete('/:id', authenticateJWT, async (req, res) => {
   try {
-    const { categoryId } = req.params;
+    const { id } = req.params;
 
-    await pool.query('DELETE FROM animal_photos WHERE id = $1', [categoryId]);
+    await pool.query('DELETE FROM animal_photos WHERE id = $1', [id]);
     res.status(200).json({ message: 'Photo deleted successfully' });
   } catch (err) {
     res.status(500).json({ message: 'Error deleting photo' });
