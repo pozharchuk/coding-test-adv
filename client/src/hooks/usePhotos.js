@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchPhotos } from "../actions";
+import { fetchPhotos } from "../api/actions";
 
 
 function shuffleArray(array) {

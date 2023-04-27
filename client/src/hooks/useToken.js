@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import { fetchToken } from "../actions";
+import { fetchToken } from "../api/actions";
 
 const useToken = () => {
     const [token, setToken] = useState(null);

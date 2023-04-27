@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import './Carousel.css';
 
@@ -13,6 +13,14 @@ const Carousel = (props) => {
     const nextPhoto = () => {
         setCurrentIndex((prevIndex) => (prevIndex === photos.length - 1 ? 0 : prevIndex + 1));
     };
+
+    useEffect(() => {
+        setCurrentIndex(0);
+    }, [photos])
+
+    if (!photos.length) {
+        return <h1>No photos to show</h1>
+    }
 
     return (
         <div>
