@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import './Filters.css'
 
-export const Filters = ({ filters = [], onFilterSelect}) => {
+const Filters = ({ filters = [], onFilterSelect}) => {
     const [selected, setSelected] = useState([]);
     const changeFilter = (newFilter) => {
         let newSelected;
@@ -21,3 +21,5 @@ export const Filters = ({ filters = [], onFilterSelect}) => {
         </div>
     )
 }
+
+export default Filters;

@@ -6,13 +6,13 @@ function shuffleArray(array) {
     return array.sort(() => Math.random() - 0.5);
 }
 
-export const usePhotos = (initCategoriesIds = []) => {
+const usePhotos = (initCategoriesIds = []) => {
     const [categoriesIds, setCategoriesIds] = useState(initCategoriesIds);
     const [photos, setPhotos] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const fetch = async () => {
+    const call = async () => {
         setLoading(true);
         try {
            const res = await fetchPhotos(categoriesIds);
@@ -24,7 +24,7 @@ export const usePhotos = (initCategoriesIds = []) => {
     }
 
     useEffect(() => {
-        fetch();
+        call();
     }, [categoriesIds]);
 
     return [
@@ -34,3 +34,5 @@ export const usePhotos = (initCategoriesIds = []) => {
         error
     ]
 }
+
+export default usePhotos;

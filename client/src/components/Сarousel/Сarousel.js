@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import './Carousel.css';
 
-export const Carousel = (props) => {
+const Carousel = (props) => {
     const { photos } = props;
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -24,3 +24,5 @@ export const Carousel = (props) => {
         </div>
     )
 }
+
+export default Carousel;

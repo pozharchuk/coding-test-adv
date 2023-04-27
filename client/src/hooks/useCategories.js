@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { fetchCategories } from "../actions";
 
-export const useCategories = () => {
+const useCategories = () => {
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const fetch = async () => {
+    const call = async () => {
         setLoading(true);
         try {
            const res = await fetchCategories(categories);
@@ -18,7 +18,7 @@ export const useCategories = () => {
     }
 
     useEffect(() => {
-        fetch();
+        call();
     }, [])
 
     return [
@@ -27,3 +27,5 @@ export const useCategories = () => {
         error,
     ]
 }
+
+export default useCategories;
