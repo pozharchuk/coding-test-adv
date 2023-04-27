@@ -1,5 +1,6 @@
-const API_URL = 'http://localhost:3000/api'
-const AUTH_URL = 'http://localhost:3000/auth'
+const API_URL = '/api'
+const AUTH_URL = '/auth'
+
 
 export const fetchCategories = async () => {
     const res = await fetch(`${API_URL}/categories/`);
